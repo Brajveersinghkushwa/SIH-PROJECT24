@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Graphs</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="timeVsTransactionChart" width="400" height="200"></canvas>
+    <canvas id="amountVsReceiverChart" width="400" height="200"></canvas>
+
+    <script>
+        // Data for the graphs
+        const timestamps = [
+            "2024-08-27T08:30:00+05:30", "2024-08-27T09:15:00+05:30", "2024-08-27T10:00:00+05:30",
+            "2024-08-27T10:45:00+05:30", "2024-08-27T11:30:00+05:30", "2024-08-27T12:15:00+05:30",
+            "2024-08-27T13:00:00+05:30", "2024-08-27T13:45:00+05:30", "2024-08-27T14:30:00+05:30",
+            "2024-08-27T15:15:00+05:30", "2024-08-27T16:00:00+05:30", "2024-08-27T16:45:00+05:30",
+            "2024-08-27T17:30:00+05:30", "2024-08-27T18:15:00+05:30", "2024-08-27T19:00:00+05:30",
+            "2024-08-27T19:45:00+05:30", "2024-08-27T20:30:00+05:30", "2024-08-27T21:15:00+05:30",
+            "2024-08-27T22:00:00+05:30", "2024-08-27T22:45:00+05:30", "2024-08-27T23:30:00+05:30",
+            "2024-08-28T00:15:00+05:30", "2024-08-28T01:00:00+05:30"
+        ];
+
+        const amounts = [
+            0.5, 1.2, 0.75, 2.0, 0.3, 1.5, 0.9, 0.4, 2.5, 1.0, 0.6, 1.8,
+            0.7, 0.2, 1.1, 0.8, 2.2, 0.5, 1.3, 0.9, 1.6, 0.4, 2.1
+        ];
+
+        const receivers = [
+            "1B2oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1D3oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1F4oXoP5QHefq2DMPTfTL5SLmv7DivfNa",
+            "1H5oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1J6oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1L7oXoP5QHefq2DMPTfTL5SLmv7DivfNa",
+            "1N8oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1P9oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1R0oXoP5QHefq2DMPTfTL5SLmv7DivfNa",
+            "1T1oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1V2oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1X3oXoP5QHefq2DMPTfTL5SLmv7DivfNa",
+            "1Z4oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1B3oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1D4oXoP5QHefq2DMPTfTL5SLmv7DivfNa",
+            "1F5oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1H6oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1J7oXoP5QHefq2DMPTfTL5SLmv7DivfNa",
+            "1L8oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1N9oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1P0oXoP5QHefq2DMPTfTL5SLmv7DivfNa",
+            "1R1oXoP5QHefq2DMPTfTL5SLmv7DivfNa", "1T2oXoP5QHefq2DMPTfTL5SLmv7DivfNa"
+        ];
+
+        // Time vs Transaction Amount Graph
+        const ctx1 = document.getElementById('timeVsTransactionChart').getContext('2d');
+        const timeVsTransactionChart = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                    label: 'Transaction Amount',
+                    data: amounts,
+                    fill: false,
+                    borderColor: 'blue',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Amount (BTC)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Amount vs Receiver's Address Graph
+        const ctx2 = document.getElementById('amountVsReceiverChart').getContext('2d');
+        const amountVsReceiverChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: receivers,
+                datasets: [{
+                    label: 'Transaction Amount',
+                    data: amounts,
+                    backgroundColor: 'green'
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Receiver Address'
+                        },
+                        ticks: {
+                            autoSkip: false
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Amount (BTC)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
