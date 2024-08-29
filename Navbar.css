@@ -1,0 +1,31 @@
+/* src/Navbar.css */
+
+.navbar-custom {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    width: 100%;
+    z-index: 1000;
+  }
+  .navbar-custom {
+    position: fixed; /* Ensure it's positioned relative to the viewport */
+    top: 0; /* Stick it to the top */
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Make sure it stays on top of other content */
+  }
+  
+  
+  .navbar-custom .navbar-brand,
+  .navbar-custom .nav-link {
+    font-size: 1.2rem;
+    color: #ccd6f6 !important;
+  }
+  
+  .navbar-custom .nav-link:hover {
+    color: #64ffda !important;
+  }
+  
+  
